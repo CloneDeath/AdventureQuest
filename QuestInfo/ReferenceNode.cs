@@ -53,5 +53,20 @@ namespace QuestInfo {
 				Reference.Options = value;
 			}
 		}
+
+		[IgnoreDataMember]
+		public override List<InventoryOperation> OnEnter
+		{
+			get
+			{
+				if (Reference == null) return null;
+				return Reference.OnEnter;
+			}
+			set
+			{
+				if (Reference == null) return;
+				Reference.OnEnter = value;
+			}
+		}
 	}
 }

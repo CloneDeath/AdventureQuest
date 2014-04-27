@@ -30,5 +30,12 @@ namespace QuestInfo {
 			get;
 			set;
 		}
+
+		[DataMember]
+		public virtual List<InventoryOperation> OnEnter
+		{
+			get;
+			set;
+		}
 	}
 }

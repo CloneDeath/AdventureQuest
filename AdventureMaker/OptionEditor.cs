@@ -52,6 +52,7 @@ namespace AdventureMaker {
 		bool Updating = false;
 		private void RebindControls() {
 			Updating = true;
+
 			if(Option == null) {
 				tbDescription.Text = "";
 				tbDescription.Enabled = false;
@@ -62,6 +63,8 @@ namespace AdventureMaker {
 
 				btnGoToNode.Enabled = false;
 				btnSelectNode.Enabled = false;
+
+				uiConditionalEditor.Comparison = null;
 			} else {
 				tbDescription.Text = Option.Description;
 				tbDescription.Enabled = true;
@@ -76,6 +79,8 @@ namespace AdventureMaker {
 
 				btnGoToNode.Enabled = true;
 				btnSelectNode.Enabled = true;
+
+				uiConditionalEditor.Comparison = Option.Comparison;
 			}
 			Updating = false;
 		}

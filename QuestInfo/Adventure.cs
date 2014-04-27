@@ -18,8 +18,9 @@ namespace QuestInfo {
 		private static DataContractSerializer serializer = new DataContractSerializer(typeof(Adventure),
 				new List<Type>() {
 					typeof(ReferenceNode),
-				}
-				,
+					typeof(InventoryValueComparison),
+					typeof(InventoryComparisonGroup)
+				},
 				0x7FFF /*maxItemsInObjectGraph*/,
 				false /*ignoreExtensionDataObject*/,
 				true /*preserveObjectReferences : this is where the magic happens */,

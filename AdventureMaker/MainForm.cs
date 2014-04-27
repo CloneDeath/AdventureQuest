@@ -11,6 +11,7 @@ using QuestInfo;
 namespace AdventureMaker {
 	public partial class MainForm : Form {
 		public Adventure CurrentAdventure;
+		public string LastFileAccess = null;
 
 		StoryNode CurrentNode {
 			get {
@@ -23,19 +24,42 @@ namespace AdventureMaker {
 
 		public MainForm() {
 			InitializeComponent();
-			newToolStripMenuItem_Click(this, null);
+			NewAdventure();
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (MessageBox.Show("Are you sure you wish to make a new adventure?\r\n" +
+								"All data will be lost.", "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+
+				NewAdventure();
+			}
+			
+		}
+
+		private void NewAdventure()
+		{
+			LastFileAccess = null;
+			saveToolStripMenuItem.Enabled = false;
+
 			CurrentAdventure = new Adventure();
+			StoryNode root = new StoryNode();
+			CurrentAdventure.RootStoryNodes.Add(root);
+			CurrentAdventure.StartingPoint = root;
 			CurrentAdventureChanged();
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+			CurrentAdventure.Save(LastFileAccess);
+		}
+
+		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			SaveFileDialog sfd = new SaveFileDialog();
 			sfd.Filter = "QuestInfo (*.qi)|*.qi|All Files (*.*)|*.*";
-			if(sfd.ShowDialog() == DialogResult.OK) {
+			if (sfd.ShowDialog() == DialogResult.OK) {
 				CurrentAdventure.Save(sfd.FileName);
+				saveToolStripMenuItem.Enabled = true;
+				LastFileAccess = sfd.FileName;
 			}
 		}
 
@@ -46,6 +70,8 @@ namespace AdventureMaker {
 			if(ofd.ShowDialog() == DialogResult.OK) {
 				CurrentAdventure = Adventure.Load(ofd.FileName);
 				CurrentAdventureChanged();
+				saveToolStripMenuItem.Enabled = true;
+				LastFileAccess = ofd.FileName;
 			}
 		}
 
@@ -100,6 +126,7 @@ namespace AdventureMaker {
 			if(CurrentNode == null) {
 				tbName.Text = "";
 				tbName.Enabled = false;
+				tbName.ForeColor = Color.Black;
 
 				tbText.Text = "";
 				tbText.Enabled = false;
@@ -109,6 +136,11 @@ namespace AdventureMaker {
 			} else {
 				tbName.Text = CurrentNode.Name;
 				tbName.Enabled = true;
+				if (CurrentNode == CurrentAdventure.StartingPoint) {
+					tbName.ForeColor = Color.Green;
+				} else {
+					tbName.ForeColor = Color.Black;
+				}
 
 				tbText.Text = CurrentNode.Text;
 				tbText.Enabled = true;
@@ -162,5 +194,7 @@ namespace AdventureMaker {
 				tvAdventureNodes.Refresh();
 			}
 		}
+
+		
 	}
 }

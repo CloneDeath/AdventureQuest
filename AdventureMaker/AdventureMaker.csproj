@@ -47,6 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConditionalEditors\ComparisonTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ConditionalEditors\ConditionalEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConditionalEditors\ConditionalEditor.Designer.cs">
+      <DependentUpon>ConditionalEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryOperationsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InventoryOperationsEditor.Designer.cs">
+      <DependentUpon>InventoryOperationsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +89,12 @@
     <Compile Include="AdventureTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="ConditionalEditors\ConditionalEditor.resx">
+      <DependentUpon>ConditionalEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryOperationsEditor.resx">
+      <DependentUpon>InventoryOperationsEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +129,7 @@
       <Name>QuestInfo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

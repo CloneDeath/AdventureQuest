@@ -13,6 +13,12 @@ namespace QuestInfo {
 		[DataMember]
 		public StoryNode Node = new StoryNode();
 
+		[DataMember]
+		public IInventoryComparison Comparison = new AlwaysTrueComparison();
+
+		[DataMember]
+		public List<IInventoryOperation> OnSelect = new List<IInventoryOperation>();
+
 		public override string ToString() {
 			return "'" + Description + "' - " + Node.Name;
 		}

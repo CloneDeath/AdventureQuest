@@ -41,6 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Inventory\Comparison\AlwaysTrueComparison.cs" />
+    <Compile Include="Inventory\Comparison\InventoryComparisonGroup.cs" />
+    <Compile Include="Inventory\Comparison\IInventoryComparison.cs" />
+    <Compile Include="Inventory\Inventory.cs" />
+    <Compile Include="Inventory\Comparison\InventoryValueComparison.cs" />
+    <Compile Include="Inventory\Operation\ConditionalOperation.cs" />
+    <Compile Include="Inventory\Operation\IInventoryOperation.cs" />
+    <Compile Include="Inventory\Operation\InventoryOperation.cs" />
+    <Compile Include="Inventory\Item.cs" />
     <Compile Include="ReferenceNode.cs" />
     <Compile Include="StoryNode.cs" />
     <Compile Include="Option.cs" />
