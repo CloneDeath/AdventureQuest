@@ -52,13 +52,17 @@ namespace AdventureMaker {
 		private void CurrentAdventureChanged() {
 			tvAdventureNodes.Adventure = this.CurrentAdventure;
 			uiOptionEditor.Adventure = this.CurrentAdventure;
-
 			RefreshUI();
 		}
 
 		
 
 		private void tvAdventureNodes_AfterSelect(object sender, TreeViewEventArgs e) {
+			if(tvAdventureNodes.SelectedStoryNode is ReferenceNode) {
+				tvAdventureNodes.SelectedStoryNode = ((ReferenceNode)tvAdventureNodes.SelectedStoryNode).Reference;
+			}
+
+			uiOptionEditor.StoryNode = tvAdventureNodes.SelectedStoryNode;
 			RefreshUI();
 		}
 
@@ -72,10 +76,10 @@ namespace AdventureMaker {
 		}
 
 		private void btnAddOption_Click(object sender, EventArgs e) {
-			Option newitem = new Option(this.CurrentNode);
+			Option newitem = new Option();
 			CurrentNode.Options.Add(newitem);
 
-			tvAdventureNodes.Refresh(CurrentNode);
+			tvAdventureNodes.Refresh();
 			tvAdventureNodes.GetNode(CurrentNode).Expand();
 
 			RefreshUI();
@@ -88,18 +92,33 @@ namespace AdventureMaker {
 			Option selectednode = (Option)lbOptions.SelectedItem;
 			CurrentNode.Options.Remove(selectednode);
 
-			tvAdventureNodes.Refresh(CurrentNode);
+			tvAdventureNodes.Refresh();
 			RefreshUI();
 		}
 
 		private void RefreshUI() {
-			tbName.Text = CurrentNode.Name;
-			tbText.Text = CurrentNode.Text;
-			lbOptions.Items.Clear();
-			foreach(Option option in CurrentNode.Options) {
-				lbOptions.Items.Add(option);
+			if(CurrentNode == null) {
+				tbName.Text = "";
+				tbName.Enabled = false;
+
+				tbText.Text = "";
+				tbText.Enabled = false;
+
+				lbOptions.Items.Clear();
+				uiOptionEditor.Option = null;
+			} else {
+				tbName.Text = CurrentNode.Name;
+				tbName.Enabled = true;
+
+				tbText.Text = CurrentNode.Text;
+				tbText.Enabled = true;
+
+				lbOptions.Items.Clear();
+				foreach(Option option in CurrentNode.Options) {
+					lbOptions.Items.Add(option);
+				}
+				uiOptionEditor.Option = null;
 			}
-			uiOptionEditor.Option = null;
 		}
 
 		private void lbOptions_SelectedIndexChanged(object sender, EventArgs e) {
@@ -110,7 +129,7 @@ namespace AdventureMaker {
 
 		private void uiOptionEditor_OnOptionChanged(object sender, EventArgs e) {
 			lbOptions.Refresh();
-			tvAdventureNodes.Refresh(CurrentNode);
+			tvAdventureNodes.Refresh();
 		}
 
 		private void uiOptionEditor_OnStoryNodeChanged(object sender, StoryChangedEventArgs e) {
@@ -118,6 +137,30 @@ namespace AdventureMaker {
 			tvAdventureNodes.SelectedNode.Expand();
 
 			tbText.Focus();
+		}
+
+		private void btnStoryNodeAdd_Click(object sender, EventArgs e) {
+			CurrentAdventure.RootStoryNodes.Add(new StoryNode());
+			tvAdventureNodes.Refresh();
+		}
+
+		private void btnStoryNodeRemove_Click(object sender, EventArgs e) {
+			if(CurrentAdventure.RootStoryNodes.Contains(tvAdventureNodes.SelectedStoryNode)) {
+				CurrentAdventure.RootStoryNodes.Remove(tvAdventureNodes.SelectedStoryNode);
+				tvAdventureNodes.Refresh();
+			} else {
+				MessageBox.Show("Only Root Story Nodes may be Removed");
+			}
+		}
+
+		private void btnMakeStartingPoint_Click(object sender, EventArgs e) {
+			if(tvAdventureNodes.SelectedStoryNode != null) {
+				if(tvAdventureNodes.SelectedStoryNode is ReferenceNode) {
+					MessageBox.Show("Can not start on a reference node");
+				}
+				CurrentAdventure.StartingPoint = tvAdventureNodes.SelectedStoryNode;
+				tvAdventureNodes.Refresh();
+			}
 		}
 	}
 }

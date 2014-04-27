@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace QuestInfo {
+	[DataContract]
 	public class Option {
-		public Option(StoryNode parent) {
-			this.Parent = parent;
-		}
+		[DataMember]
 		public string Description = "Choice";
+
+		[DataMember]
 		public StoryNode Node = new StoryNode();
-		public StoryNode Parent;
 
 		public override string ToString() {
 			return "'" + Description + "' - " + Node.Name;

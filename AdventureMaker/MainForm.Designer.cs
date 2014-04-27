@@ -28,7 +28,6 @@
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
 			this.lblName = new System.Windows.Forms.Label();
 			this.tbName = new System.Windows.Forms.TextBox();
 			this.lblText = new System.Windows.Forms.Label();
@@ -36,8 +35,12 @@
 			this.lblOptions = new System.Windows.Forms.Label();
 			this.btnAddOption = new System.Windows.Forms.Button();
 			this.btnDeleteOption = new System.Windows.Forms.Button();
+			this.btnStoryNodeAdd = new System.Windows.Forms.Button();
+			this.btnStoryNodeRemove = new System.Windows.Forms.Button();
+			this.btnMakeStartingPoint = new System.Windows.Forms.Button();
 			this.lbOptions = new AdventureMaker.RefreshListBox();
 			this.uiOptionEditor = new AdventureMaker.OptionEditor();
+			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -64,35 +67,23 @@
 			// newToolStripMenuItem
 			// 
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.newToolStripMenuItem.Text = "New";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// loadToolStripMenuItem
 			// 
 			this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-			this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.loadToolStripMenuItem.Text = "Load";
 			this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-			// 
-			// tvAdventureNodes
-			// 
-			this.tvAdventureNodes.Adventure = null;
-			this.tvAdventureNodes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.tvAdventureNodes.HideSelection = false;
-			this.tvAdventureNodes.Location = new System.Drawing.Point(13, 28);
-			this.tvAdventureNodes.Name = "tvAdventureNodes";
-			this.tvAdventureNodes.Size = new System.Drawing.Size(264, 426);
-			this.tvAdventureNodes.TabIndex = 1;
-			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
 			// 
 			// lblName
 			// 
@@ -169,6 +160,38 @@
 			this.btnDeleteOption.UseVisualStyleBackColor = true;
 			this.btnDeleteOption.Click += new System.EventHandler(this.btnDeleteOption_Click);
 			// 
+			// btnStoryNodeAdd
+			// 
+			this.btnStoryNodeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnStoryNodeAdd.Location = new System.Drawing.Point(12, 431);
+			this.btnStoryNodeAdd.Name = "btnStoryNodeAdd";
+			this.btnStoryNodeAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnStoryNodeAdd.TabIndex = 12;
+			this.btnStoryNodeAdd.Text = "Add";
+			this.btnStoryNodeAdd.UseVisualStyleBackColor = true;
+			this.btnStoryNodeAdd.Click += new System.EventHandler(this.btnStoryNodeAdd_Click);
+			// 
+			// btnStoryNodeRemove
+			// 
+			this.btnStoryNodeRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnStoryNodeRemove.Location = new System.Drawing.Point(202, 431);
+			this.btnStoryNodeRemove.Name = "btnStoryNodeRemove";
+			this.btnStoryNodeRemove.Size = new System.Drawing.Size(75, 23);
+			this.btnStoryNodeRemove.TabIndex = 13;
+			this.btnStoryNodeRemove.Text = "Remove";
+			this.btnStoryNodeRemove.UseVisualStyleBackColor = true;
+			this.btnStoryNodeRemove.Click += new System.EventHandler(this.btnStoryNodeRemove_Click);
+			// 
+			// btnMakeStartingPoint
+			// 
+			this.btnMakeStartingPoint.Location = new System.Drawing.Point(12, 28);
+			this.btnMakeStartingPoint.Name = "btnMakeStartingPoint";
+			this.btnMakeStartingPoint.Size = new System.Drawing.Size(132, 23);
+			this.btnMakeStartingPoint.TabIndex = 14;
+			this.btnMakeStartingPoint.Text = "Make Starting Point";
+			this.btnMakeStartingPoint.UseVisualStyleBackColor = true;
+			this.btnMakeStartingPoint.Click += new System.EventHandler(this.btnMakeStartingPoint_Click);
+			// 
 			// lbOptions
 			// 
 			this.lbOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -188,15 +211,32 @@
 			this.uiOptionEditor.Name = "uiOptionEditor";
 			this.uiOptionEditor.Option = null;
 			this.uiOptionEditor.Size = new System.Drawing.Size(253, 124);
+			this.uiOptionEditor.StoryNode = null;
 			this.uiOptionEditor.TabIndex = 10;
 			this.uiOptionEditor.OnOptionChanged += new System.EventHandler<System.EventArgs>(this.uiOptionEditor_OnOptionChanged);
 			this.uiOptionEditor.OnStoryNodeChanged += new System.EventHandler<AdventureMaker.StoryChangedEventArgs>(this.uiOptionEditor_OnStoryNodeChanged);
+			// 
+			// tvAdventureNodes
+			// 
+			this.tvAdventureNodes.Adventure = null;
+			this.tvAdventureNodes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.tvAdventureNodes.HideSelection = false;
+			this.tvAdventureNodes.Location = new System.Drawing.Point(13, 57);
+			this.tvAdventureNodes.Name = "tvAdventureNodes";
+			this.tvAdventureNodes.SelectedStoryNode = null;
+			this.tvAdventureNodes.Size = new System.Drawing.Size(264, 368);
+			this.tvAdventureNodes.TabIndex = 1;
+			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(822, 466);
+			this.Controls.Add(this.btnMakeStartingPoint);
+			this.Controls.Add(this.btnStoryNodeRemove);
+			this.Controls.Add(this.btnStoryNodeAdd);
 			this.Controls.Add(this.lbOptions);
 			this.Controls.Add(this.uiOptionEditor);
 			this.Controls.Add(this.btnDeleteOption);
@@ -236,6 +276,9 @@
 		private System.Windows.Forms.Button btnDeleteOption;
 		private OptionEditor uiOptionEditor;
 		private RefreshListBox lbOptions;
+		private System.Windows.Forms.Button btnStoryNodeAdd;
+		private System.Windows.Forms.Button btnStoryNodeRemove;
+		private System.Windows.Forms.Button btnMakeStartingPoint;
 	}
 }
 

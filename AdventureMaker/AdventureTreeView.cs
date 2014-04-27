@@ -19,7 +19,7 @@ namespace AdventureMaker {
 				_adventure = value;
 				Refresh();
 
-				if(Adventure != null) {
+				if(Adventure != null && Adventure.StartingPoint != null) {
 					this.SelectedNode = ReverseNodeMapping[Adventure.StartingPoint];
 				}
 			}
@@ -47,7 +47,9 @@ namespace AdventureMaker {
 				ReverseNodeMapping[data] = node;
 			}
 
-			if(data is ReferenceNode) {
+			if(data == Adventure.StartingPoint) {
+				node.ForeColor = Color.Green;
+			} else if(data is ReferenceNode) {
 				node.ForeColor = Color.Blue;
 			} else {
 				node.ForeColor = Color.Black;
@@ -67,22 +69,92 @@ namespace AdventureMaker {
 		public override void Refresh() {
 			StoryNode selectednode = this.SelectedStoryNode;
 
-			this.Nodes.Clear();
 			ReverseNodeMapping.Clear();
 			if (Adventure == null) return;
 
-			this.Nodes.Clear();
-			this.Nodes.Add(CreateTreeNode(Adventure.StartingPoint));
+			/* Remove Old Nodes */
+			List<TreeNode> ToRemove = new List<TreeNode>();
+			foreach(TreeNode node in this.Nodes) {
+				bool Found = false;
+				foreach(StoryNode storynode in Adventure.RootStoryNodes) {
+					if(node.Tag == storynode) {
+						Found = true;
+						break;
+					}
+					if(!Found) {
+						ToRemove.Add(node);
+					}
+				}
+			}
+			foreach(TreeNode node in ToRemove) {
+				this.Nodes.Remove(node);
+			}
 
-			if(selectednode != null) {
+			/* Add/Update Existing Nodes */
+			foreach(StoryNode storyNode in Adventure.RootStoryNodes) {
+				TreeNode child = null;
+				foreach(TreeNode node in this.Nodes) {
+					if(node.Tag == storyNode) {
+						child = node;
+						break;
+					}
+				}
+
+				if (child == null){
+					this.Nodes.Add(CreateTreeNode(storyNode));
+				} else {
+					this.BindData(child, storyNode);
+					UpdateNode(child);
+				}
+			}
+
+			if(selectednode != null && ReverseNodeMapping.ContainsKey(selectednode)) {
 				this.SelectedStoryNode = selectednode;
 			}
 		}
 
-		public void Refresh(StoryNode storyNode) {
-			TreeNode node = GetNode(storyNode);
-			BindData(node, storyNode);
-			node.Nodes.Clear();
+		private void UpdateNode(TreeNode treeNode) {
+			StoryNode storyNode = (StoryNode)treeNode.Tag;
+			this.BindData(treeNode, storyNode);
+
+			if(treeNode.Tag is ReferenceNode) {
+				treeNode.Nodes.Clear();
+				return;
+			}
+
+			/* Remove Old Nodes */
+			List<TreeNode> ToRemove = new List<TreeNode>();
+			foreach(TreeNode child in treeNode.Nodes) {
+				bool Found = false;
+				foreach(Option opt in storyNode.Options) {
+					if(opt.Node == child.Tag) {
+						Found = true;
+						break;
+					}
+				}
+				if(!Found) {
+					ToRemove.Add(child);
+				}
+			}
+			foreach(TreeNode remove in ToRemove) {
+				treeNode.Nodes.Remove(remove);
+			}
+
+			/* Add/Update Existing Nodes */
+			foreach(Option opt in storyNode.Options) {
+				TreeNode Found = null;
+				foreach(TreeNode child in treeNode.Nodes) {
+					if(child.Tag == opt.Node) {
+						Found = child;
+						break;
+					}
+				}
+				if(Found != null) {
+					UpdateNode(Found);
+				} else {
+					treeNode.Nodes.Add(this.CreateTreeNode(opt.Node));
+				}
+			}
 		}
 
 		public StoryNode SelectedStoryNode {
@@ -91,6 +163,7 @@ namespace AdventureMaker {
 				return (StoryNode)this.SelectedNode.Tag;
 			}
 			set {
+				if (value == null) return;
 				this.SelectedNode = ReverseNodeMapping[value];
 			}
 		}

@@ -19,6 +19,11 @@ namespace AdventureMaker {
 			set;
 		}
 
+		public StoryNode StoryNode {
+			get;
+			set;
+		}
+
 		Option _option;
 		public Option Option {
 			get {
@@ -96,7 +101,7 @@ namespace AdventureMaker {
 		private void btnSelectNode_Click(object sender, EventArgs e) {
 			SelectNodeForm snf = new SelectNodeForm();
 			snf.Adventure = this.Adventure;
-			snf.SelectedNode = Option.Parent;
+			snf.SelectedNode = this.StoryNode;
 			if(snf.ShowDialog() == DialogResult.OK) {
 				Option.Node = new ReferenceNode(snf.SelectedNode);
 				this.RebindControls();

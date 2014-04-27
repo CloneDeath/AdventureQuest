@@ -5,8 +5,15 @@ using System.Text;
 using System.Runtime.Serialization;
 
 namespace QuestInfo {
+	[DataContract]
 	public class ReferenceNode : StoryNode {
+		[DataMember]
 		public StoryNode Reference;
+
+		public ReferenceNode() {
+			Reference = null;
+		}
+
 		public ReferenceNode(StoryNode reference) {
 			this.Reference = reference;
 		}

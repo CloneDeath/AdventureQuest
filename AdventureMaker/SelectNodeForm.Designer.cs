@@ -26,6 +26,8 @@
 			this.tvAdventure = new AdventureMaker.AdventureTreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
+			this.btnExpandAll = new System.Windows.Forms.Button();
+			this.btnCollapseAll = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// tvAdventure
@@ -34,9 +36,10 @@
 			this.tvAdventure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.tvAdventure.Location = new System.Drawing.Point(12, 12);
+			this.tvAdventure.Location = new System.Drawing.Point(12, 42);
 			this.tvAdventure.Name = "tvAdventure";
-			this.tvAdventure.Size = new System.Drawing.Size(246, 343);
+			this.tvAdventure.SelectedStoryNode = null;
+			this.tvAdventure.Size = new System.Drawing.Size(246, 313);
 			this.tvAdventure.TabIndex = 0;
 			this.tvAdventure.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventure_AfterSelect);
 			// 
@@ -63,6 +66,26 @@
 			this.btnOK.UseVisualStyleBackColor = true;
 			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
+			// btnExpandAll
+			// 
+			this.btnExpandAll.Location = new System.Drawing.Point(13, 13);
+			this.btnExpandAll.Name = "btnExpandAll";
+			this.btnExpandAll.Size = new System.Drawing.Size(75, 23);
+			this.btnExpandAll.TabIndex = 3;
+			this.btnExpandAll.Text = "Expand All";
+			this.btnExpandAll.UseVisualStyleBackColor = true;
+			this.btnExpandAll.Click += new System.EventHandler(this.btnExpandAll_Click);
+			// 
+			// btnCollapseAll
+			// 
+			this.btnCollapseAll.Location = new System.Drawing.Point(183, 12);
+			this.btnCollapseAll.Name = "btnCollapseAll";
+			this.btnCollapseAll.Size = new System.Drawing.Size(75, 23);
+			this.btnCollapseAll.TabIndex = 4;
+			this.btnCollapseAll.Text = "Collapse All";
+			this.btnCollapseAll.UseVisualStyleBackColor = true;
+			this.btnCollapseAll.Click += new System.EventHandler(this.btnCollapseAll_Click);
+			// 
 			// SelectNodeForm
 			// 
 			this.AcceptButton = this.btnOK;
@@ -70,6 +93,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(270, 402);
+			this.Controls.Add(this.btnCollapseAll);
+			this.Controls.Add(this.btnExpandAll);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.tvAdventure);
@@ -84,5 +109,7 @@
 		private AdventureTreeView tvAdventure;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
+		private System.Windows.Forms.Button btnExpandAll;
+		private System.Windows.Forms.Button btnCollapseAll;
 	}
 }

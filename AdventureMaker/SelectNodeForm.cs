@@ -49,5 +49,13 @@ namespace AdventureMaker {
 				btnOK.Enabled = true;
 			}
 		}
+
+		private void btnExpandAll_Click(object sender, EventArgs e) {
+			tvAdventure.ExpandAll();
+		}
+
+		private void btnCollapseAll_Click(object sender, EventArgs e) {
+			tvAdventure.CollapseAll();
+		}
 	}
 }
