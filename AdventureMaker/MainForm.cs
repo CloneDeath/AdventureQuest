@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using QuestInfo;
+using AdventureQuest;
 
 namespace AdventureMaker {
 	public partial class MainForm : Form {
@@ -277,6 +278,13 @@ namespace AdventureMaker {
 
 			RefreshUI();
 			lbOptions.SelectedItem = higher;
+		}
+
+		private void adventureToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			WorldView view = new WorldView();
+			view.StartAdventure(CurrentAdventure);
+			view.ShowDialog();
 		}
 	}
 }

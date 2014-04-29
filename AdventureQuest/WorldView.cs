@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using QuestInfo;
+using System.Runtime.InteropServices;
 
 namespace AdventureQuest {
 	public partial class WorldView : Form {
@@ -26,12 +27,17 @@ namespace AdventureQuest {
 			ofd.Filter = "QuestInfo (*.qi)|*.qi|All Files (*.*)|*.*";
 			ofd.Multiselect = false;
 			if (ofd.ShowDialog() == DialogResult.OK) {
-				Items = new Inventory();
-				Adventure = Adventure.Load(ofd.FileName);
-				
-				EnterStoryNode(Adventure.StartingPoint);
-				RefreshUI();
+				Adventure adv = Adventure.Load(ofd.FileName);
+				StartAdventure(adv);
 			}
+		}
+
+		public void StartAdventure(Adventure adventure)
+		{
+			Items = new Inventory();
+			Adventure = adventure;
+			EnterStoryNode(Adventure.StartingPoint);
+			RefreshUI();
 		}
 
 		private void EnterStoryNode(StoryNode node)
@@ -59,6 +65,7 @@ namespace AdventureQuest {
 
 			lbInventory.Items.Clear();
 			lbInventory.Items.AddRange(Items.GetAll());
+			tbText.Select(0, 0);
 		}
 
 		void OptionButton_Click(object sender, EventArgs e)

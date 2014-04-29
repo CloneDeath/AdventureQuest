@@ -122,6 +122,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdventureQuest\AdventureQuest.csproj">
+      <Project>{94CC8473-9D8F-48E8-A6C2-352DCCDE9EF5}</Project>
+      <Name>AdventureQuest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuestInfo\QuestInfo.csproj">
       <Project>{07465FA6-5282-4BF4-934A-EE1FC41D5D7E}</Project>
       <Name>QuestInfo</Name>

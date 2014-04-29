@@ -45,13 +45,16 @@
 			this.lbOptions = new AdventureMaker.RefreshListBox();
 			this.uiOptionEditor = new AdventureMaker.OptionEditor();
 			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
+			this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.adventureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.testToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(1150, 24);
@@ -275,6 +278,21 @@
 			this.tvAdventureNodes.TabIndex = 1;
 			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
 			// 
+			// testToolStripMenuItem
+			// 
+			this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adventureToolStripMenuItem});
+			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+			this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.testToolStripMenuItem.Text = "Test";
+			// 
+			// adventureToolStripMenuItem
+			// 
+			this.adventureToolStripMenuItem.Name = "adventureToolStripMenuItem";
+			this.adventureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.adventureToolStripMenuItem.Text = "Adventure...";
+			this.adventureToolStripMenuItem.Click += new System.EventHandler(this.adventureToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,6 +350,8 @@
 		private OperationsEditor uiOperationEditor_StoryNode;
 		private System.Windows.Forms.Button btnMoveOptionDown;
 		private System.Windows.Forms.Button btnMoveOptionUp;
+		private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem adventureToolStripMenuItem;
 	}
 }
 

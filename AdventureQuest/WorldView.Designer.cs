@@ -62,6 +62,7 @@
 			this.tbText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.tbText.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.tbText.Location = new System.Drawing.Point(13, 27);
 			this.tbText.Multiline = true;
 			this.tbText.Name = "tbText";
