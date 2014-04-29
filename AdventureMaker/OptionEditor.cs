@@ -14,9 +14,18 @@ namespace AdventureMaker {
 			InitializeComponent();
 		}
 
+		private Adventure _adventure;
 		public Adventure Adventure {
-			get;
-			set;
+			get
+			{
+				return _adventure;
+			}
+			set
+			{
+				_adventure = value;
+				uiOperationsEditor.Adventure = value;
+				uiConditionalEditor.Adventure = value;
+			}
 		}
 
 		public StoryNode StoryNode {

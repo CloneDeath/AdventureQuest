@@ -10,7 +10,20 @@ using QuestInfo;
 
 namespace AdventureMaker {
 	public partial class MainForm : Form {
-		public Adventure CurrentAdventure;
+		Adventure _adventure;
+		public Adventure CurrentAdventure
+		{
+			get
+			{
+				return _adventure;
+			}
+			set
+			{
+				_adventure = value;
+				uiOptionEditor.Adventure = value;
+				uiOperationEditor_StoryNode.Adventure = value;
+			}
+		}
 		public string LastFileAccess = null;
 
 		StoryNode CurrentNode {
@@ -72,12 +85,12 @@ namespace AdventureMaker {
 				CurrentAdventureChanged();
 				saveToolStripMenuItem.Enabled = true;
 				LastFileAccess = ofd.FileName;
+				tvAdventureNodes.ExpandAll();
 			}
 		}
 
 		private void CurrentAdventureChanged() {
 			tvAdventureNodes.Adventure = this.CurrentAdventure;
-			uiOptionEditor.Adventure = this.CurrentAdventure;
 			RefreshUI();
 		}
 

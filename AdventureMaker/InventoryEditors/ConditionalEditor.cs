@@ -30,6 +30,8 @@ namespace AdventureMaker
 			cbConditionalType.DataSource = items;
 		}
 
+		public Adventure Adventure { get; set; }
+
 		List<InventoryConditional> _conditionals;
 		public List<InventoryConditional> Conditionals
 		{
@@ -74,8 +76,8 @@ namespace AdventureMaker
 			}
 
 			if (SelectedConditional == null) {
-				tbItemName.Text = "";
-				tbItemName.Enabled = false;
+				cbItemName.Text = "";
+				cbItemName.Enabled = false;
 
 				cbConditionalType.SelectedItem = null;
 				cbConditionalType.Enabled = false;
@@ -83,8 +85,8 @@ namespace AdventureMaker
 				nudValue.Value = 0;
 				nudValue.Enabled = false;
 			} else {
-				tbItemName.Text = SelectedConditional.InventoryItem;
-				tbItemName.Enabled = true;
+				cbItemName.Text = SelectedConditional.InventoryItem;
+				cbItemName.Enabled = true;
 
 				cbConditionalType.SelectedValue = SelectedConditional.ComparisonOperator;
 				cbConditionalType.Enabled = true;
@@ -119,11 +121,11 @@ namespace AdventureMaker
 			UpdateUI();
 		}
 
-		private void tbItemName_TextChanged(object sender, EventArgs e)
+		private void cbItemName_TextChanged(object sender, EventArgs e)
 		{
 			if (SelectedConditional == null || Updating) return;
 
-			SelectedConditional.InventoryItem = tbItemName.Text;
+			SelectedConditional.InventoryItem = cbItemName.Text;
 			lbConditionals.Refresh();
 		}
 
@@ -142,5 +144,13 @@ namespace AdventureMaker
 			SelectedConditional.Value = (int)nudValue.Value;
 			lbConditionals.Refresh();
 		}
+
+		private void cbItemName_DropDown(object sender, EventArgs e)
+		{
+			cbItemName.Items.Clear();
+			cbItemName.Items.AddRange(Adventure.GetItemNames());
+		}
+
+		
 	}
 }

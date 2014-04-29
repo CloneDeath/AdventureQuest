@@ -31,6 +31,12 @@ namespace AdventureMaker
 			cbOperationType.DataSource = items;
 		}
 
+		public Adventure Adventure
+		{
+			get;
+			set;
+		}
+
 		List<InventoryOperation> _operations;
 		public List<InventoryOperation> Operations
 		{
@@ -75,8 +81,8 @@ namespace AdventureMaker
 			}
 
 			if (SelectedOperation == null) {
-				tbItemName.Text = "";
-				tbItemName.Enabled = false;
+				cbItemName.Text = "";
+				cbItemName.Enabled = false;
 
 				cbOperationType.SelectedItem = null;
 				cbOperationType.Enabled = false;
@@ -87,8 +93,8 @@ namespace AdventureMaker
 				btnMoveUp.Enabled = false;
 				btnMoveDown.Enabled = false;
 			} else {
-				tbItemName.Text = SelectedOperation.ItemName;
-				tbItemName.Enabled = true;
+				cbItemName.Text = SelectedOperation.ItemName;
+				cbItemName.Enabled = true;
 
 				cbOperationType.SelectedValue = SelectedOperation.Operation;
 				cbOperationType.Enabled = true;
@@ -143,11 +149,11 @@ namespace AdventureMaker
 			UpdateUI();
 		}
 
-		private void tbItemName_TextChanged(object sender, EventArgs e)
+		private void cbItemName_TextChanged(object sender, EventArgs e)
 		{
 			if (SelectedOperation == null || Updating) return;
 
-			SelectedOperation.ItemName = tbItemName.Text;
+			SelectedOperation.ItemName = cbItemName.Text;
 			lbOperations.Refresh();
 		}
 
@@ -199,6 +205,12 @@ namespace AdventureMaker
 			Operations[Index + 1] = higher;
 
 			lbOperations.Refresh();
+		}
+
+		private void cbItemName_DropDown(object sender, EventArgs e)
+		{
+			cbItemName.Items.Clear();
+			cbItemName.Items.AddRange(Adventure.GetItemNames());
 		}
 	}
 }
