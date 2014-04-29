@@ -47,6 +47,7 @@
 			this.lbOptions = new AdventureMaker.RefreshListBox();
 			this.uiOptionEditor = new AdventureMaker.OptionEditor();
 			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
+			this.currentStoryNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -107,7 +108,8 @@
 			// testToolStripMenuItem
 			// 
 			this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adventureToolStripMenuItem});
+            this.adventureToolStripMenuItem,
+            this.currentStoryNodeToolStripMenuItem});
 			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
 			this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
 			this.testToolStripMenuItem.Text = "Test";
@@ -115,7 +117,7 @@
 			// adventureToolStripMenuItem
 			// 
 			this.adventureToolStripMenuItem.Name = "adventureToolStripMenuItem";
-			this.adventureToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.adventureToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
 			this.adventureToolStripMenuItem.Text = "Adventure...";
 			this.adventureToolStripMenuItem.Click += new System.EventHandler(this.adventureToolStripMenuItem_Click);
 			// 
@@ -294,6 +296,13 @@
 			this.tvAdventureNodes.TabIndex = 1;
 			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
 			// 
+			// currentStoryNodeToolStripMenuItem
+			// 
+			this.currentStoryNodeToolStripMenuItem.Name = "currentStoryNodeToolStripMenuItem";
+			this.currentStoryNodeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.currentStoryNodeToolStripMenuItem.Text = "Current Story Node...";
+			this.currentStoryNodeToolStripMenuItem.Click += new System.EventHandler(this.currentStoryNodeToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,6 +362,7 @@
 		private System.Windows.Forms.Button btnMoveOptionUp;
 		private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem adventureToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem currentStoryNodeToolStripMenuItem;
 	}
 }
 

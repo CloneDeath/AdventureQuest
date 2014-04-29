@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace QuestInfo
 {
 	public class Inventory
 	{
-		Dictionary<string, Item> Items = new Dictionary<string, Item>();
+		public Inventory()
+		{
+			Items = new Dictionary<string, Item>();
+		}
+
+		public Dictionary<string, Item> Items
+		{
+			get;
+			set;
+		}
 
 		public Item GetItem(string ItemName)
 		{

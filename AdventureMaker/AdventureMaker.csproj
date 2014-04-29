@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventure_Extensions.cs" />
+    <Compile Include="InventoryEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryEditor.Designer.cs">
+      <DependentUpon>InventoryEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="InventoryEditors\ConditionalEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     <Compile Include="AdventureTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="InventoryEditor.resx">
+      <DependentUpon>InventoryEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InventoryEditors\ConditionalEditor.resx">
       <DependentUpon>ConditionalEditor.cs</DependentUpon>
     </EmbeddedResource>

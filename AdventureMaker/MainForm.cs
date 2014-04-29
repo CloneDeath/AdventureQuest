@@ -323,5 +323,26 @@ namespace AdventureMaker {
 			view.StartAdventure(CurrentAdventure);
 			view.ShowDialog();
 		}
+
+		private void currentStoryNodeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (CurrentNode == null) {
+				MessageBox.Show("Please select a story node you wish to start out from...");
+				return;
+			}
+
+			InventoryEditor inv_editor = new InventoryEditor();
+			inv_editor.Adventure = CurrentAdventure;
+			if (inv_editor.ShowDialog() == System.Windows.Forms.DialogResult.Cancel) {
+				return;
+			}
+
+			WorldView view = new WorldView();
+			view.StartAdventure(CurrentAdventure);
+			view.EnterStoryNode(CurrentNode);
+			view.Items = inv_editor.Inventory;
+			view.RefreshUI();
+			view.ShowDialog();
+		}
 	}
 }

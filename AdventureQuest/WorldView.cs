@@ -15,10 +15,11 @@ namespace AdventureQuest {
 
 		StoryNode CurrentNode;
 
-		Inventory Items = new Inventory();
+		public Inventory Items;
 
 		public WorldView() {
 			InitializeComponent();
+			Items = new Inventory();
 		}
 
 		private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,13 +41,13 @@ namespace AdventureQuest {
 			RefreshUI();
 		}
 
-		private void EnterStoryNode(StoryNode node)
+		public void EnterStoryNode(StoryNode node)
 		{
 			CurrentNode = node;
 			node.Selected(Items);
 		}
 
-		private void RefreshUI()
+		public void RefreshUI()
 		{
 			tbText.Text = CurrentNode.Text;
 
