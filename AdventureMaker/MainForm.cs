@@ -134,10 +134,20 @@ namespace AdventureMaker {
 			if (CurrentNode.Options.Count == 0) return;
 
 			Option selectednode = (Option)lbOptions.SelectedItem;
-			CurrentNode.Options.Remove(selectednode);
 
-			tvAdventureNodes.Refresh();
-			RefreshUI();
+			if (selectednode.Node is ReferenceNode) {
+				CurrentNode.Options.Remove(selectednode);
+
+				tvAdventureNodes.Refresh();
+				RefreshUI();
+			} else {
+				if (MessageBox.Show("Are you sure you wish to delete this option? The story node and any children will go with it...", "Warning", MessageBoxButtons.YesNoCancel) == DialogResult.Yes) {
+					CurrentNode.Options.Remove(selectednode);
+
+					tvAdventureNodes.Refresh();
+					RefreshUI();
+				}
+			}
 		}
 
 		private void RefreshUI() {

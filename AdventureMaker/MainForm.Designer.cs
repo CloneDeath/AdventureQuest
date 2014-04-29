@@ -154,20 +154,19 @@
 			// 
 			this.btnAddOption.Location = new System.Drawing.Point(557, 301);
 			this.btnAddOption.Name = "btnAddOption";
-			this.btnAddOption.Size = new System.Drawing.Size(88, 23);
+			this.btnAddOption.Size = new System.Drawing.Size(121, 23);
 			this.btnAddOption.TabIndex = 8;
-			this.btnAddOption.Text = "Add New";
+			this.btnAddOption.Text = "Add New Option";
 			this.btnAddOption.UseVisualStyleBackColor = true;
 			this.btnAddOption.Click += new System.EventHandler(this.btnAddOption_Click);
 			// 
 			// btnDeleteOption
 			// 
-			this.btnDeleteOption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDeleteOption.Location = new System.Drawing.Point(1050, 301);
+			this.btnDeleteOption.Location = new System.Drawing.Point(730, 301);
 			this.btnDeleteOption.Name = "btnDeleteOption";
-			this.btnDeleteOption.Size = new System.Drawing.Size(88, 23);
+			this.btnDeleteOption.Size = new System.Drawing.Size(121, 23);
 			this.btnDeleteOption.TabIndex = 9;
-			this.btnDeleteOption.Text = "Delete Current";
+			this.btnDeleteOption.Text = "Delete Current Option";
 			this.btnDeleteOption.UseVisualStyleBackColor = true;
 			this.btnDeleteOption.Click += new System.EventHandler(this.btnDeleteOption_Click);
 			// 
@@ -244,6 +243,7 @@
 			// 
 			// uiOperationEditor_StoryNode
 			// 
+			this.uiOperationEditor_StoryNode.Adventure = null;
 			this.uiOperationEditor_StoryNode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.uiOperationEditor_StoryNode.Location = new System.Drawing.Point(706, 67);
 			this.uiOperationEditor_StoryNode.Name = "uiOperationEditor_StoryNode";
