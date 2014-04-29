@@ -58,6 +58,14 @@ namespace AdventureMaker {
 			}
 		}
 
+		public event EventHandler<EventArgs> OnAdventureTreeRefresh;
+		private void TriggerAdventureTreeRefresh()
+		{
+			if (OnAdventureTreeRefresh != null) {
+				OnAdventureTreeRefresh(this, null);
+			}
+		}
+
 		bool Updating = false;
 		private void RebindControls() {
 			Updating = true;
@@ -141,7 +149,7 @@ namespace AdventureMaker {
 			if (Option == null || Updating) return;
 
 			Option.Node.Name = tbStoryNode.Text;
-			TriggerOnOptionChanged();
+			TriggerAdventureTreeRefresh();
 		}
 
 		

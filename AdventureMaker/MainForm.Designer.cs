@@ -29,6 +29,8 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.adventureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lblName = new System.Windows.Forms.Label();
 			this.tbName = new System.Windows.Forms.TextBox();
 			this.lblText = new System.Windows.Forms.Label();
@@ -45,8 +47,6 @@
 			this.lbOptions = new AdventureMaker.RefreshListBox();
 			this.uiOptionEditor = new AdventureMaker.OptionEditor();
 			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
-			this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.adventureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -103,6 +103,21 @@
 			this.loadToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.loadToolStripMenuItem.Text = "Load...";
 			this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+			// 
+			// testToolStripMenuItem
+			// 
+			this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adventureToolStripMenuItem});
+			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+			this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.testToolStripMenuItem.Text = "Test";
+			// 
+			// adventureToolStripMenuItem
+			// 
+			this.adventureToolStripMenuItem.Name = "adventureToolStripMenuItem";
+			this.adventureToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.adventureToolStripMenuItem.Text = "Adventure...";
+			this.adventureToolStripMenuItem.Click += new System.EventHandler(this.adventureToolStripMenuItem_Click);
 			// 
 			// lblName
 			// 
@@ -264,6 +279,7 @@
 			this.uiOptionEditor.TabIndex = 10;
 			this.uiOptionEditor.OnOptionChanged += new System.EventHandler<System.EventArgs>(this.uiOptionEditor_OnOptionChanged);
 			this.uiOptionEditor.OnStoryNodeChanged += new System.EventHandler<AdventureMaker.StoryChangedEventArgs>(this.uiOptionEditor_OnStoryNodeChanged);
+			this.uiOptionEditor.OnAdventureTreeRefresh += new System.EventHandler<System.EventArgs>(this.uiOptionEditor_OnAdventureTreeRefresh);
 			// 
 			// tvAdventureNodes
 			// 
@@ -277,21 +293,6 @@
 			this.tvAdventureNodes.Size = new System.Drawing.Size(264, 480);
 			this.tvAdventureNodes.TabIndex = 1;
 			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
-			// 
-			// testToolStripMenuItem
-			// 
-			this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adventureToolStripMenuItem});
-			this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-			this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-			this.testToolStripMenuItem.Text = "Test";
-			// 
-			// adventureToolStripMenuItem
-			// 
-			this.adventureToolStripMenuItem.Name = "adventureToolStripMenuItem";
-			this.adventureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.adventureToolStripMenuItem.Text = "Adventure...";
-			this.adventureToolStripMenuItem.Click += new System.EventHandler(this.adventureToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

@@ -209,7 +209,6 @@ namespace AdventureMaker {
 
 		private void uiOptionEditor_OnOptionChanged(object sender, EventArgs e) {
 			lbOptions.Refresh();
-			tvAdventureNodes.Refresh();
 		}
 
 		private void uiOptionEditor_OnStoryNodeChanged(object sender, StoryChangedEventArgs e) {
@@ -217,6 +216,12 @@ namespace AdventureMaker {
 			tvAdventureNodes.SelectedNode.Expand();
 
 			tbText.Focus();
+		}
+
+		private void uiOptionEditor_OnAdventureTreeRefresh(object sender, EventArgs e)
+		{
+			lbOptions.Refresh();
+			tvAdventureNodes.Refresh();
 		}
 
 		private void btnStoryNodeAdd_Click(object sender, EventArgs e) {
