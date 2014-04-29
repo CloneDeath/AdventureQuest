@@ -30,9 +30,10 @@
 			this.btnGoToNode = new System.Windows.Forms.Button();
 			this.btnSelectNode = new System.Windows.Forms.Button();
 			this.uiConditionalEditor = new AdventureMaker.ConditionalEditor();
-			this.uiInventoryOperationsEditor = new AdventureMaker.InventoryOperationsEditor();
+			this.uiOperationsEditor = new AdventureMaker.OperationsEditor();
 			this.lblCanChoose = new System.Windows.Forms.Label();
 			this.lblOnOptionChosen = new System.Windows.Forms.Label();
+			this.btnCreateNode = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// lblDescription
@@ -50,7 +51,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbDescription.Location = new System.Drawing.Point(72, 4);
 			this.tbDescription.Name = "tbDescription";
-			this.tbDescription.Size = new System.Drawing.Size(806, 20);
+			this.tbDescription.Size = new System.Drawing.Size(851, 20);
 			this.tbDescription.TabIndex = 1;
 			this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
 			// 
@@ -84,7 +85,7 @@
 			// 
 			// btnSelectNode
 			// 
-			this.btnSelectNode.Location = new System.Drawing.Point(372, 28);
+			this.btnSelectNode.Location = new System.Drawing.Point(372, 29);
 			this.btnSelectNode.Name = "btnSelectNode";
 			this.btnSelectNode.Size = new System.Drawing.Size(89, 23);
 			this.btnSelectNode.TabIndex = 5;
@@ -96,21 +97,21 @@
 			// 
 			this.uiConditionalEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
-			this.uiConditionalEditor.Comparison = null;
+			this.uiConditionalEditor.Conditionals = null;
 			this.uiConditionalEditor.Location = new System.Drawing.Point(6, 77);
 			this.uiConditionalEditor.Name = "uiConditionalEditor";
 			this.uiConditionalEditor.Size = new System.Drawing.Size(455, 377);
 			this.uiConditionalEditor.TabIndex = 6;
 			// 
-			// uiInventoryOperationsEditor
+			// uiOperationsEditor
 			// 
-			this.uiInventoryOperationsEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.uiInventoryOperationsEditor.Location = new System.Drawing.Point(467, 77);
-			this.uiInventoryOperationsEditor.Name = "uiInventoryOperationsEditor";
-			this.uiInventoryOperationsEditor.Size = new System.Drawing.Size(411, 377);
-			this.uiInventoryOperationsEditor.TabIndex = 7;
+			this.uiOperationsEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.uiOperationsEditor.Location = new System.Drawing.Point(467, 77);
+			this.uiOperationsEditor.Name = "uiOperationsEditor";
+			this.uiOperationsEditor.Operations = null;
+			this.uiOperationsEditor.Size = new System.Drawing.Size(456, 377);
+			this.uiOperationsEditor.TabIndex = 7;
 			// 
 			// lblCanChoose
 			// 
@@ -130,13 +131,24 @@
 			this.lblOnOptionChosen.TabIndex = 9;
 			this.lblOnOptionChosen.Text = "On Option Choosen:";
 			// 
+			// btnCreateNode
+			// 
+			this.btnCreateNode.Location = new System.Drawing.Point(467, 29);
+			this.btnCreateNode.Name = "btnCreateNode";
+			this.btnCreateNode.Size = new System.Drawing.Size(89, 23);
+			this.btnCreateNode.TabIndex = 10;
+			this.btnCreateNode.Text = "CreateNode";
+			this.btnCreateNode.UseVisualStyleBackColor = true;
+			this.btnCreateNode.Click += new System.EventHandler(this.btnCreateNode_Click);
+			// 
 			// OptionEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.btnCreateNode);
 			this.Controls.Add(this.lblOnOptionChosen);
 			this.Controls.Add(this.lblCanChoose);
-			this.Controls.Add(this.uiInventoryOperationsEditor);
+			this.Controls.Add(this.uiOperationsEditor);
 			this.Controls.Add(this.uiConditionalEditor);
 			this.Controls.Add(this.btnSelectNode);
 			this.Controls.Add(this.btnGoToNode);
@@ -145,7 +157,7 @@
 			this.Controls.Add(this.tbDescription);
 			this.Controls.Add(this.lblDescription);
 			this.Name = "OptionEditor";
-			this.Size = new System.Drawing.Size(881, 457);
+			this.Size = new System.Drawing.Size(926, 457);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -160,8 +172,9 @@
 		private System.Windows.Forms.Button btnGoToNode;
 		private System.Windows.Forms.Button btnSelectNode;
 		private ConditionalEditor uiConditionalEditor;
-		private InventoryOperationsEditor uiInventoryOperationsEditor;
+		private OperationsEditor uiOperationsEditor;
 		private System.Windows.Forms.Label lblCanChoose;
 		private System.Windows.Forms.Label lblOnOptionChosen;
+		private System.Windows.Forms.Button btnCreateNode;
 	}
 }

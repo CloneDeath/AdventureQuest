@@ -63,8 +63,10 @@ namespace AdventureMaker {
 
 				btnGoToNode.Enabled = false;
 				btnSelectNode.Enabled = false;
+				btnCreateNode.Enabled = false;
 
-				uiConditionalEditor.Comparison = null;
+				uiConditionalEditor.Conditionals = null;
+				uiOperationsEditor.Operations = null;
 			} else {
 				tbDescription.Text = Option.Description;
 				tbDescription.Enabled = true;
@@ -79,8 +81,10 @@ namespace AdventureMaker {
 
 				btnGoToNode.Enabled = true;
 				btnSelectNode.Enabled = true;
+				btnCreateNode.Enabled = Option.Node is ReferenceNode;
 
-				uiConditionalEditor.Comparison = Option.Comparison;
+				uiConditionalEditor.Conditionals = Option.Comparison;
+				uiOperationsEditor.Operations = Option.OnSelect;
 			}
 			Updating = false;
 		}
@@ -96,6 +100,34 @@ namespace AdventureMaker {
 			TriggerStoryNodeChanged(Option.Node);
 		}
 
+		private void btnSelectNode_Click(object sender, EventArgs e)
+		{
+			SelectNodeForm snf = new SelectNodeForm();
+			snf.Adventure = this.Adventure;
+			snf.SelectedNode = this.StoryNode;
+			if (snf.ShowDialog() == DialogResult.OK) {
+				if (snf.SelectedNode == Option.Node) {
+					return; // Same node selected
+				}
+
+				Option.Node = new ReferenceNode(snf.SelectedNode);
+				this.RebindControls();
+				TriggerOnOptionChanged();
+			}
+		}
+
+		private void btnCreateNode_Click(object sender, EventArgs e)
+		{
+			if (Option.Node is ReferenceNode) {
+				string OldName = Option.Node.Name;
+				Option.Node = new StoryNode();
+				Option.Node.Name = OldName;
+				TriggerOnOptionChanged();
+			} else {
+				MessageBox.Show("Can only create a new node from a reference node");
+			}
+		}
+
 		private void tbStoryNode_TextChanged(object sender, EventArgs e) {
 			if (Option == null || Updating) return;
 
@@ -103,17 +135,7 @@ namespace AdventureMaker {
 			TriggerOnOptionChanged();
 		}
 
-		private void btnSelectNode_Click(object sender, EventArgs e) {
-			SelectNodeForm snf = new SelectNodeForm();
-			snf.Adventure = this.Adventure;
-			snf.SelectedNode = this.StoryNode;
-			if(snf.ShowDialog() == DialogResult.OK) {
-				Option.Node = new ReferenceNode(snf.SelectedNode);
-				this.RebindControls();
-				TriggerOnOptionChanged();
-				//TriggerStoryNodeChanged(snf.SelectedNode);
-			}
-		}
+		
 
 		private void tbStoryNode_KeyPress(object sender, KeyPressEventArgs e) {
 			if(e.KeyChar == '\r') {
@@ -121,5 +143,7 @@ namespace AdventureMaker {
 				btnGoToNode_Click(this, null);
 			}
 		}
+
+		
 	}
 }

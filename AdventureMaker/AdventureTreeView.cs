@@ -10,6 +10,8 @@ namespace AdventureMaker {
 	class AdventureTreeView : TreeView {
 		Dictionary<StoryNode, TreeNode> ReverseNodeMapping = new Dictionary<StoryNode, TreeNode>();
 
+		
+
 		private Adventure _adventure;
 		public Adventure Adventure {
 			get {
@@ -29,12 +31,46 @@ namespace AdventureMaker {
 			TreeNode node = new TreeNode(storyNode.Name);
 			this.BindData(node, storyNode);
 
+			/* Context Menu Strip */
+			ContextMenuStrip NodeOptions = new ContextMenuStrip();
+			NodeOptions.Tag = node;
+			ToolStripItem ExpandAll = NodeOptions.Items.Add("Expand All");
+			ExpandAll.Tag = node;
+			ExpandAll.Click += new EventHandler(ExpandAll_Click);
+
+			ToolStripItem CollapseAll = NodeOptions.Items.Add("Collapse All");
+			CollapseAll.Tag = node;
+			CollapseAll.Click += new EventHandler(CollapseAll_Click);
+
+			node.ContextMenuStrip = NodeOptions;
+
+			/* Children */
 			if(!(storyNode is ReferenceNode)) {
 				foreach(Option option in storyNode.Options) {
 					node.Nodes.Add(CreateTreeNode(option.Node));
 				}
 			}
 			return node;
+		}
+
+		static void ExpandAll_Click(object sender, EventArgs e)
+		{
+			((TreeNode)((ToolStripItem)sender).Tag).ExpandAll();
+		}
+
+		static void CollapseAll_Click(object sender, EventArgs e)
+		{
+			TreeNode target = ((TreeNode)((ToolStripItem)sender).Tag);
+			RecursiveCollapse(target);
+		}
+
+		static void RecursiveCollapse(TreeNode node)
+		{
+			node.Collapse();
+
+			foreach (TreeNode child in node.Nodes) {
+				RecursiveCollapse(child);
+			}
 		}
 
 		private void BindData(TreeNode node, StoryNode data) {
@@ -110,6 +146,43 @@ namespace AdventureMaker {
 
 			if(selectednode != null && ReverseNodeMapping.ContainsKey(selectednode)) {
 				this.SelectedStoryNode = selectednode;
+			}
+
+			/* Lastly, ensure all reference nodes reference an existing node */
+			List<KeyValuePair<StoryNode, TreeNode>> ToUpdate = new List<KeyValuePair<StoryNode, TreeNode>>();
+			foreach (KeyValuePair<StoryNode, TreeNode> kvp in ReverseNodeMapping) {
+				if (kvp.Key is ReferenceNode) {
+					ReferenceNode node = kvp.Key as ReferenceNode;
+					if (!ReverseNodeMapping.ContainsKey(node.Reference)) {
+						ToUpdate.Add(kvp);
+					}
+				}
+			}
+			if (ToUpdate.Count > 0) {
+				foreach (KeyValuePair<StoryNode, TreeNode> node in ToUpdate) {
+					ReferenceNode refNode = node.Key as ReferenceNode;
+
+					if (ReverseNodeMapping.ContainsKey(refNode.Reference)) {
+						continue; // Already updated...
+					}
+					StoryNode parentNode = (StoryNode)node.Value.Parent.Tag;
+
+					bool FoundOne = false;
+					foreach (Option opt in parentNode.Options) {
+						if (opt.Node == refNode) {
+							opt.Node = refNode.Reference;
+							node.Value.Tag = opt.Node;
+							ReverseNodeMapping[opt.Node] = node.Value;
+							FoundOne = true;
+							break;
+						}
+					}
+
+					if (!FoundOne) {
+						throw new Exception("Failed to find reference node to non existant story node");
+					}
+				}
+				Refresh();
 			}
 		}
 

@@ -195,6 +195,9 @@ namespace AdventureMaker {
 			}
 		}
 
-		
+		private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Show all");
+		}		
 	}
 }

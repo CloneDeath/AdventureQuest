@@ -14,10 +14,10 @@ namespace QuestInfo {
 		public StoryNode Node = new StoryNode();
 
 		[DataMember]
-		public IInventoryComparison Comparison = new AlwaysTrueComparison();
+		public List<InventoryConditional> Comparison = new List<InventoryConditional>();
 
 		[DataMember]
-		public List<IInventoryOperation> OnSelect = new List<IInventoryOperation>();
+		public List<InventoryOperation> OnSelect = new List<InventoryOperation>();
 
 		public override string ToString() {
 			return "'" + Description + "' - " + Node.Name;

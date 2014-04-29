@@ -47,20 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConditionalEditors\ComparisonTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ConditionalEditors\ConditionalEditor.cs">
+    <Compile Include="InventoryEditors\ConditionalEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ConditionalEditors\ConditionalEditor.Designer.cs">
+    <Compile Include="InventoryEditors\ConditionalEditor.Designer.cs">
       <DependentUpon>ConditionalEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryOperationsEditor.cs">
+    <Compile Include="InventoryEditors\OperationsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InventoryOperationsEditor.Designer.cs">
-      <DependentUpon>InventoryOperationsEditor.cs</DependentUpon>
+    <Compile Include="InventoryEditors\OperationsEditor.Designer.cs">
+      <DependentUpon>OperationsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -89,11 +86,11 @@
     <Compile Include="AdventureTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <EmbeddedResource Include="ConditionalEditors\ConditionalEditor.resx">
+    <EmbeddedResource Include="InventoryEditors\ConditionalEditor.resx">
       <DependentUpon>ConditionalEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventoryOperationsEditor.resx">
-      <DependentUpon>InventoryOperationsEditor.cs</DependentUpon>
+    <EmbeddedResource Include="InventoryEditors\OperationsEditor.resx">
+      <DependentUpon>OperationsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
