@@ -27,6 +27,24 @@ namespace AdventureMaker {
 		}
 		public string LastFileAccess = null;
 
+		bool _dirty = false;
+		public bool Dirty
+		{
+			get
+			{
+				return _dirty;
+			}
+			set
+			{
+				_dirty = value;
+				if (_dirty) {
+					this.Text = "* Adventure Maker" + (LastFileAccess == null ? "" : " - " + LastFileAccess);
+				} else {
+					this.Text = "Adventure Maker" + (LastFileAccess == null ? "" : " - " + LastFileAccess);
+				}
+			}
+		}
+
 		StoryNode CurrentNode {
 			get {
 				if(tvAdventureNodes.SelectedNode == null) {
@@ -60,10 +78,12 @@ namespace AdventureMaker {
 			CurrentAdventure.RootStoryNodes.Add(root);
 			CurrentAdventure.StartingPoint = root;
 			CurrentAdventureChanged();
+			Dirty = false;
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
 			CurrentAdventure.Save(LastFileAccess);
+			Dirty = false;
 		}
 
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,6 +94,7 @@ namespace AdventureMaker {
 				CurrentAdventure.Save(sfd.FileName);
 				saveToolStripMenuItem.Enabled = true;
 				LastFileAccess = sfd.FileName;
+				Dirty = false;
 			}
 		}
 
@@ -87,6 +108,7 @@ namespace AdventureMaker {
 				saveToolStripMenuItem.Enabled = true;
 				LastFileAccess = ofd.FileName;
 				tvAdventureNodes.ExpandCount(2);
+				Dirty = false;
 			}
 		}
 
@@ -114,10 +136,12 @@ namespace AdventureMaker {
 		private void tbName_TextChanged(object sender, EventArgs e) {
 			CurrentNode.Name = tbName.Text;
 			tvAdventureNodes.SelectedNode.Text = tbName.Text;
+			Dirty = true;
 		}
 
 		private void tbText_TextChanged(object sender, EventArgs e) {
 			CurrentNode.Text = tbText.Text;
+			Dirty = true;
 		}
 
 		private void btnAddOption_Click(object sender, EventArgs e) {
@@ -129,6 +153,7 @@ namespace AdventureMaker {
 
 			RefreshUI();
 			lbOptions.SelectedItem = newitem;
+			Dirty = true;
 		}
 
 		private void btnDeleteOption_Click(object sender, EventArgs e) {
@@ -141,12 +166,14 @@ namespace AdventureMaker {
 
 				tvAdventureNodes.Refresh();
 				RefreshUI();
+				Dirty = true;
 			} else {
 				if (MessageBox.Show("Are you sure you wish to delete this option? The story node and any children will go with it...", "Warning", MessageBoxButtons.YesNoCancel) == DialogResult.Yes) {
 					CurrentNode.Options.Remove(selectednode);
 
 					tvAdventureNodes.Refresh();
 					RefreshUI();
+					Dirty = true;
 				}
 			}
 		}
@@ -222,17 +249,20 @@ namespace AdventureMaker {
 		{
 			lbOptions.Refresh();
 			tvAdventureNodes.Refresh();
+			Dirty = true;
 		}
 
 		private void btnStoryNodeAdd_Click(object sender, EventArgs e) {
 			CurrentAdventure.RootStoryNodes.Add(new StoryNode());
 			tvAdventureNodes.Refresh();
+			Dirty = true;
 		}
 
 		private void btnStoryNodeRemove_Click(object sender, EventArgs e) {
 			if(CurrentAdventure.RootStoryNodes.Contains(tvAdventureNodes.SelectedStoryNode)) {
 				CurrentAdventure.RootStoryNodes.Remove(tvAdventureNodes.SelectedStoryNode);
 				tvAdventureNodes.Refresh();
+				Dirty = true;
 			} else {
 				MessageBox.Show("Only Root Story Nodes may be Removed");
 			}
@@ -245,12 +275,8 @@ namespace AdventureMaker {
 				}
 				CurrentAdventure.StartingPoint = tvAdventureNodes.SelectedStoryNode;
 				tvAdventureNodes.Refresh();
+				Dirty = true;
 			}
-		}
-
-		private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show("Show all");
 		}
 
 		private void btnMoveOptionUp_Click(object sender, EventArgs e)
@@ -269,6 +295,7 @@ namespace AdventureMaker {
 			lbOptions.SelectedItem = lower;
 
 			tvAdventureNodes.Refresh();
+			Dirty = true;
 		}
 
 		private void btnMoveOptionDown_Click(object sender, EventArgs e)
@@ -287,6 +314,7 @@ namespace AdventureMaker {
 			lbOptions.SelectedItem = higher;
 
 			tvAdventureNodes.Refresh();
+			Dirty = true;
 		}
 
 		private void adventureToolStripMenuItem_Click(object sender, EventArgs e)
