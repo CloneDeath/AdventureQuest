@@ -129,7 +129,7 @@ namespace AdventureMaker {
 
 				Option.Node = new ReferenceNode(snf.SelectedNode);
 				this.RebindControls();
-				TriggerOnOptionChanged();
+				TriggerAdventureTreeRefresh();
 			}
 		}
 
@@ -139,7 +139,7 @@ namespace AdventureMaker {
 				string OldName = Option.Node.Name;
 				Option.Node = new StoryNode();
 				Option.Node.Name = OldName;
-				TriggerOnOptionChanged();
+				TriggerAdventureTreeRefresh();
 			} else {
 				MessageBox.Show("Can only create a new node from a reference node");
 			}
