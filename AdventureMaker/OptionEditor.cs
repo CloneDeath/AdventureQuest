@@ -149,7 +149,7 @@ namespace AdventureMaker {
 			if (Option == null || Updating) return;
 
 			Option.Node.Name = tbStoryNode.Text;
-			TriggerAdventureTreeRefresh();
+			TriggerOnOptionChanged();
 		}
 
 		

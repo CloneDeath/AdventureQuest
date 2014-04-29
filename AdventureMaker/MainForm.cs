@@ -236,6 +236,7 @@ namespace AdventureMaker {
 
 		private void uiOptionEditor_OnOptionChanged(object sender, EventArgs e) {
 			lbOptions.Refresh();
+			tvAdventureNodes.GetNode(uiOptionEditor.Option.Node).Text = uiOptionEditor.Option.Node.Name;
 		}
 
 		private void uiOptionEditor_OnStoryNodeChanged(object sender, StoryChangedEventArgs e) {
