@@ -117,9 +117,9 @@ namespace AdventureMaker {
 						Found = true;
 						break;
 					}
-					if(!Found) {
-						ToRemove.Add(node);
-					}
+				}
+				if (!Found) {
+					ToRemove.Add(node);
 				}
 			}
 			foreach(TreeNode node in ToRemove) {
