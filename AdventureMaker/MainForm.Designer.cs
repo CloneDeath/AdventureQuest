@@ -39,10 +39,12 @@
 			this.btnStoryNodeAdd = new System.Windows.Forms.Button();
 			this.btnStoryNodeRemove = new System.Windows.Forms.Button();
 			this.btnMakeStartingPoint = new System.Windows.Forms.Button();
+			this.btnMoveOptionDown = new System.Windows.Forms.Button();
+			this.btnMoveOptionUp = new System.Windows.Forms.Button();
+			this.uiOperationEditor_StoryNode = new AdventureMaker.OperationsEditor();
 			this.lbOptions = new AdventureMaker.RefreshListBox();
 			this.uiOptionEditor = new AdventureMaker.OptionEditor();
 			this.tvAdventureNodes = new AdventureMaker.AdventureTreeView();
-			this.uiOperationEditor_StoryNode = new AdventureMaker.OperationsEditor();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -202,14 +204,46 @@
 			this.btnMakeStartingPoint.UseVisualStyleBackColor = true;
 			this.btnMakeStartingPoint.Click += new System.EventHandler(this.btnMakeStartingPoint_Click);
 			// 
+			// btnMoveOptionDown
+			// 
+			this.btnMoveOptionDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnMoveOptionDown.Location = new System.Drawing.Point(431, 543);
+			this.btnMoveOptionDown.Name = "btnMoveOptionDown";
+			this.btnMoveOptionDown.Size = new System.Drawing.Size(120, 23);
+			this.btnMoveOptionDown.TabIndex = 17;
+			this.btnMoveOptionDown.Text = "Move Option Down";
+			this.btnMoveOptionDown.UseVisualStyleBackColor = true;
+			this.btnMoveOptionDown.Click += new System.EventHandler(this.btnMoveOptionDown_Click);
+			// 
+			// btnMoveOptionUp
+			// 
+			this.btnMoveOptionUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnMoveOptionUp.Location = new System.Drawing.Point(431, 514);
+			this.btnMoveOptionUp.Name = "btnMoveOptionUp";
+			this.btnMoveOptionUp.Size = new System.Drawing.Size(120, 23);
+			this.btnMoveOptionUp.TabIndex = 16;
+			this.btnMoveOptionUp.Text = "Move Option Up";
+			this.btnMoveOptionUp.UseVisualStyleBackColor = true;
+			this.btnMoveOptionUp.Click += new System.EventHandler(this.btnMoveOptionUp_Click);
+			// 
+			// uiOperationEditor_StoryNode
+			// 
+			this.uiOperationEditor_StoryNode.Adventure = null;
+			this.uiOperationEditor_StoryNode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.uiOperationEditor_StoryNode.Location = new System.Drawing.Point(706, 67);
+			this.uiOperationEditor_StoryNode.Name = "uiOperationEditor_StoryNode";
+			this.uiOperationEditor_StoryNode.Operations = null;
+			this.uiOperationEditor_StoryNode.Size = new System.Drawing.Size(432, 215);
+			this.uiOperationEditor_StoryNode.TabIndex = 15;
+			// 
 			// lbOptions
 			// 
 			this.lbOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
 			this.lbOptions.FormattingEnabled = true;
-			this.lbOptions.Location = new System.Drawing.Point(286, 307);
+			this.lbOptions.Location = new System.Drawing.Point(286, 301);
 			this.lbOptions.Name = "lbOptions";
-			this.lbOptions.Size = new System.Drawing.Size(265, 251);
+			this.lbOptions.Size = new System.Drawing.Size(265, 212);
 			this.lbOptions.TabIndex = 11;
 			this.lbOptions.SelectedIndexChanged += new System.EventHandler(this.lbOptions_SelectedIndexChanged);
 			// 
@@ -241,21 +275,13 @@
 			this.tvAdventureNodes.TabIndex = 1;
 			this.tvAdventureNodes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvAdventureNodes_AfterSelect);
 			// 
-			// uiOperationEditor_StoryNode
-			// 
-			this.uiOperationEditor_StoryNode.Adventure = null;
-			this.uiOperationEditor_StoryNode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.uiOperationEditor_StoryNode.Location = new System.Drawing.Point(706, 67);
-			this.uiOperationEditor_StoryNode.Name = "uiOperationEditor_StoryNode";
-			this.uiOperationEditor_StoryNode.Operations = null;
-			this.uiOperationEditor_StoryNode.Size = new System.Drawing.Size(432, 215);
-			this.uiOperationEditor_StoryNode.TabIndex = 15;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1150, 578);
+			this.Controls.Add(this.btnMoveOptionDown);
+			this.Controls.Add(this.btnMoveOptionUp);
 			this.Controls.Add(this.uiOperationEditor_StoryNode);
 			this.Controls.Add(this.btnMakeStartingPoint);
 			this.Controls.Add(this.btnStoryNodeRemove);
@@ -304,6 +330,8 @@
 		private System.Windows.Forms.Button btnMakeStartingPoint;
 		private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
 		private OperationsEditor uiOperationEditor_StoryNode;
+		private System.Windows.Forms.Button btnMoveOptionDown;
+		private System.Windows.Forms.Button btnMoveOptionUp;
 	}
 }
 

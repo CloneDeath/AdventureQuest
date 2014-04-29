@@ -161,6 +161,9 @@ namespace AdventureMaker {
 
 				lbOptions.Items.Clear();
 				uiOptionEditor.Option = null;
+
+				btnMoveOptionUp.Enabled = false;
+				btnMoveOptionDown.Enabled = false;
 			} else {
 				tbName.Text = CurrentNode.Name;
 				tbName.Enabled = true;
@@ -178,12 +181,28 @@ namespace AdventureMaker {
 					lbOptions.Items.Add(option);
 				}
 				uiOptionEditor.Option = null;
+
+				btnMoveOptionUp.Enabled = false;
+				btnMoveOptionDown.Enabled = false;
 			}
 		}
 
 		private void lbOptions_SelectedIndexChanged(object sender, EventArgs e) {
 			if(uiOptionEditor.Option != lbOptions.SelectedItem) {
 				uiOptionEditor.Option = (Option)lbOptions.SelectedItem;
+
+				int Index = lbOptions.Items.IndexOf(lbOptions.SelectedItem);
+				if (Index == 0) {
+					btnMoveOptionUp.Enabled = false;
+				} else {
+					btnMoveOptionUp.Enabled = true;
+				}
+
+				if (Index == lbOptions.Items.Count - 1) {
+					btnMoveOptionDown.Enabled = false;
+				} else {
+					btnMoveOptionDown.Enabled = true;
+				}
 			}
 		}
 
@@ -226,6 +245,38 @@ namespace AdventureMaker {
 		private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			MessageBox.Show("Show all");
-		}		
+		}
+
+		private void btnMoveOptionUp_Click(object sender, EventArgs e)
+		{
+			if (lbOptions.SelectedItem == null) return;
+
+			int Index = lbOptions.Items.IndexOf(lbOptions.SelectedItem);
+
+			Option higher = CurrentNode.Options[Index - 1];
+			Option lower = CurrentNode.Options[Index];
+
+			CurrentNode.Options[Index - 1] = lower;
+			CurrentNode.Options[Index] = higher;
+
+			RefreshUI();
+			lbOptions.SelectedItem = lower;
+		}
+
+		private void btnMoveOptionDown_Click(object sender, EventArgs e)
+		{
+			if (lbOptions.SelectedItem == null) return;
+
+			int Index = lbOptions.Items.IndexOf(lbOptions.SelectedItem);
+
+			Option higher = CurrentNode.Options[Index];
+			Option lower = CurrentNode.Options[Index + 1];
+
+			CurrentNode.Options[Index] = lower;
+			CurrentNode.Options[Index + 1] = higher;
+
+			RefreshUI();
+			lbOptions.SelectedItem = higher;
+		}
 	}
 }

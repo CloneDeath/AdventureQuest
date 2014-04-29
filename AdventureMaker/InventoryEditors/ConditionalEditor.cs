@@ -52,6 +52,10 @@ namespace AdventureMaker
 			{
 				return (InventoryConditional)lbConditionals.SelectedItem;
 			}
+			set
+			{
+				lbConditionals.SelectedItem = value;
+			}
 		}
 
 		bool Updating = false;
@@ -102,8 +106,10 @@ namespace AdventureMaker
 		{
 			if (Conditionals == null) return;
 
-			Conditionals.Add(new InventoryConditional());
+			InventoryConditional cond = new InventoryConditional();
+			Conditionals.Add(cond);
 			UpdateUI();
+			SelectedConditional = cond;
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)

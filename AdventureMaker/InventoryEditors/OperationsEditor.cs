@@ -57,6 +57,10 @@ namespace AdventureMaker
 			{
 				return (InventoryOperation)lbOperations.SelectedItem;
 			}
+			set
+			{
+				lbOperations.SelectedItem = value;
+			}
 		}
 
 		bool Updating = false;
@@ -130,8 +134,10 @@ namespace AdventureMaker
 		{
 			if (Operations == null) return;
 
-			Operations.Add(new InventoryOperation());
+			InventoryOperation op = new InventoryOperation();
+			Operations.Add(op);
 			UpdateUI();
+			SelectedOperation = op;
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
