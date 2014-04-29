@@ -89,6 +89,11 @@ namespace AdventureMaker {
 			}
 
 			uiOptionEditor.StoryNode = tvAdventureNodes.SelectedStoryNode;
+			if (tvAdventureNodes.SelectedStoryNode != null) {
+				uiOperationEditor_StoryNode.Operations = tvAdventureNodes.SelectedStoryNode.OnEnter;
+			} else {
+				uiOperationEditor_StoryNode.Operations = null;
+			}
 			RefreshUI();
 		}
 

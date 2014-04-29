@@ -21,5 +21,16 @@ namespace QuestInfo
 			}
 			return Items[ItemName];
 		}
+
+		public Item[] GetAll()
+		{
+			List<Item> ret = new List<Item>();
+			foreach (Item item in Items.Values) {
+				if (item.Visible) {
+					ret.Add(item);
+				}
+			}
+			return ret.ToArray();
+		}
 	}
 }

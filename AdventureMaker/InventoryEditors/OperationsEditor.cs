@@ -83,6 +83,9 @@ namespace AdventureMaker
 
 				nudValue.Value = 0;
 				nudValue.Enabled = false;
+
+				btnMoveUp.Enabled = false;
+				btnMoveDown.Enabled = false;
 			} else {
 				tbItemName.Text = SelectedOperation.ItemName;
 				tbItemName.Enabled = true;
@@ -100,7 +103,18 @@ namespace AdventureMaker
 					nudValue.Enabled = false;
 				}
 
-				
+				int Index = Operations.IndexOf(SelectedOperation);
+				if (Index == 0) {
+					btnMoveUp.Enabled = false;
+				} else {
+					btnMoveUp.Enabled = true;
+				}
+
+				if (Index == Operations.Count - 1) {
+					btnMoveDown.Enabled = false;
+				} else {
+					btnMoveDown.Enabled = true;
+				}
 			}
 
 			Updating = false;
@@ -150,6 +164,40 @@ namespace AdventureMaker
 			if (SelectedOperation == null || Updating) return;
 
 			SelectedOperation.Value = (int)nudValue.Value;
+			lbOperations.Refresh();
+		}
+
+		private void btnMoveUp_Click(object sender, EventArgs e)
+		{
+			if (SelectedOperation == null) return;
+
+			int Index = Operations.IndexOf(SelectedOperation);
+
+			if (Index == 0) return; // Can't move up anymore.
+
+			InventoryOperation higher = Operations[Index - 1];
+			InventoryOperation lower = Operations[Index];
+
+			Operations[Index - 1] = lower;
+			Operations[Index] = higher;
+
+			lbOperations.Refresh();
+		}
+
+		private void btnMoveDown_Click(object sender, EventArgs e)
+		{
+			if (SelectedOperation == null) return;
+
+			int Index = Operations.IndexOf(SelectedOperation);
+
+			if (Index == Operations.Count - 1) return; // Can't move down anymore.
+
+			InventoryOperation higher = Operations[Index];
+			InventoryOperation lower = Operations[Index + 1];
+
+			Operations[Index] = lower;
+			Operations[Index + 1] = higher;
+
 			lbOperations.Refresh();
 		}
 	}

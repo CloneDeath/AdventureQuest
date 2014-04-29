@@ -11,6 +11,7 @@ namespace QuestInfo {
 			this.Name = "Story Node";
 			this.Text = "";
 			this.Options = new List<Option>();
+			this.OnEnter = new List<InventoryOperation>();
 		}
 
 		[DataMember]
@@ -36,6 +37,13 @@ namespace QuestInfo {
 		{
 			get;
 			set;
+		}
+
+		public void Selected(Inventory current_inventory)
+		{
+			foreach (InventoryOperation operation in OnEnter) {
+				operation.Resolve(current_inventory);
+			}
 		}
 	}
 }

@@ -83,7 +83,7 @@ namespace AdventureMaker {
 				btnSelectNode.Enabled = true;
 				btnCreateNode.Enabled = Option.Node is ReferenceNode;
 
-				uiConditionalEditor.Conditionals = Option.Comparison;
+				uiConditionalEditor.Conditionals = Option.Conditionals;
 				uiOperationsEditor.Operations = Option.OnSelect;
 			}
 			Updating = false;

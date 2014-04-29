@@ -14,6 +14,8 @@ namespace AdventureQuest {
 
 		StoryNode CurrentNode;
 
+		Inventory Items = new Inventory();
+
 		public WorldView() {
 			InitializeComponent();
 		}
@@ -24,32 +26,46 @@ namespace AdventureQuest {
 			ofd.Filter = "QuestInfo (*.qi)|*.qi|All Files (*.*)|*.*";
 			ofd.Multiselect = false;
 			if (ofd.ShowDialog() == DialogResult.OK) {
+				Items = new Inventory();
 				Adventure = Adventure.Load(ofd.FileName);
-				CurrentNode = Adventure.StartingPoint;
+				
+				EnterStoryNode(Adventure.StartingPoint);
 				RefreshUI();
 			}
 		}
 
+		private void EnterStoryNode(StoryNode node)
+		{
+			CurrentNode = node;
+			node.Selected(Items);
+		}
+
 		private void RefreshUI()
 		{
-			lblNodeName.Text = CurrentNode.Name;
 			tbText.Text = CurrentNode.Text;
 
 			flpOptions.Controls.Clear();
 			foreach (Option option in CurrentNode.Options) {
-				Button btn = new Button();
-				btn.Text = option.Description;
-				btn.Tag = option;
-				btn.Click += new EventHandler(OptionButton_Click);
-				btn.AutoSize = true;
-				if (btn.Width < 100) btn.Width = 100;
-				flpOptions.Controls.Add(btn);
+				if (option.CanChoose(Items)) {
+					Button btn = new Button();
+					btn.Text = option.Description;
+					btn.Tag = option;
+					btn.Click += new EventHandler(OptionButton_Click);
+					btn.AutoSize = true;
+					if (btn.Width < 100) btn.Width = 100;
+					flpOptions.Controls.Add(btn);
+				}
 			}
+
+			lbInventory.Items.Clear();
+			lbInventory.Items.AddRange(Items.GetAll());
 		}
 
 		void OptionButton_Click(object sender, EventArgs e)
 		{
-			CurrentNode = ((Option)((Button)sender).Tag).Node;
+			Option ChosenOption = (Option)((Button)sender).Tag;
+			EnterStoryNode(ChosenOption.Node);
+			ChosenOption.Selected(Items);
 			RefreshUI();
 		}
 	}

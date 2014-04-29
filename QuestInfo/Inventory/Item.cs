@@ -21,5 +21,17 @@ namespace QuestInfo
 
 		public bool Visible { get; set; }
 		public bool ValueVisible { get; set; }
+
+		public override string ToString()
+		{
+			string ret = "";
+			if (Visible) {
+				ret += Name;
+				if (ValueVisible) {
+					ret += " (" + Value.ToString() + ")";
+				}
+			}
+			return ret;
+		}
 	}
 }
