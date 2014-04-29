@@ -86,7 +86,7 @@ namespace AdventureMaker {
 				CurrentAdventureChanged();
 				saveToolStripMenuItem.Enabled = true;
 				LastFileAccess = ofd.FileName;
-				tvAdventureNodes.ExpandAll();
+				tvAdventureNodes.ExpandCount(2);
 			}
 		}
 
@@ -262,6 +262,8 @@ namespace AdventureMaker {
 
 			RefreshUI();
 			lbOptions.SelectedItem = lower;
+
+			tvAdventureNodes.Refresh();
 		}
 
 		private void btnMoveOptionDown_Click(object sender, EventArgs e)
@@ -278,6 +280,8 @@ namespace AdventureMaker {
 
 			RefreshUI();
 			lbOptions.SelectedItem = higher;
+
+			tvAdventureNodes.Refresh();
 		}
 
 		private void adventureToolStripMenuItem_Click(object sender, EventArgs e)

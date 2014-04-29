@@ -148,7 +148,7 @@ namespace AdventureMaker {
 				this.SelectedStoryNode = selectednode;
 			}
 
-			/* Lastly, ensure all reference nodes reference an existing node */
+			/* Ensure all reference nodes reference an existing node */
 			List<KeyValuePair<StoryNode, TreeNode>> ToUpdate = new List<KeyValuePair<StoryNode, TreeNode>>();
 			foreach (KeyValuePair<StoryNode, TreeNode> kvp in ReverseNodeMapping) {
 				if (kvp.Key is ReferenceNode) {
@@ -228,6 +228,43 @@ namespace AdventureMaker {
 					treeNode.Nodes.Add(this.CreateTreeNode(opt.Node));
 				}
 			}
+
+			/* Reorder Nodes */
+			for (int i = 0; i < storyNode.Options.Count(); i++) {
+				Option opt = storyNode.Options[i];
+
+				if (treeNode.Nodes[i].Tag == opt.Node) {
+					continue;
+				} else { /* Swap with correct node */
+					int FoundNodeIndex = -1;
+					/* Look for correct node */
+					for (int lookup = i + 1; lookup < treeNode.Nodes.Count; lookup++) {
+						if (treeNode.Nodes[lookup].Tag == opt.Node) {
+							FoundNodeIndex = lookup;
+							break;
+						}
+					}
+
+					/* Failed to find one */
+					if (FoundNodeIndex == -1) {
+						//throw new Exception("Failed to find correct node to swap with");
+					} else {
+						TreeNode higher = treeNode.Nodes[i];
+						TreeNode lower = treeNode.Nodes[FoundNodeIndex];
+
+						treeNode.Nodes.RemoveAt(FoundNodeIndex);
+						treeNode.Nodes.RemoveAt(i);
+
+						treeNode.Nodes.Insert(i, lower);
+						treeNode.Nodes.Insert(FoundNodeIndex, higher);
+
+						// Swapping nodes like this causes duplicate nodes. :/
+						//treeNode.Nodes[i] = lower;
+						//treeNode.Nodes[FoundNodeIndex] = higher;
+					}
+					
+				}
+			}
 		}
 
 		public StoryNode SelectedStoryNode {
@@ -239,6 +276,32 @@ namespace AdventureMaker {
 				if (value == null) return;
 				this.SelectedNode = ReverseNodeMapping[value];
 			}
+		}
+
+		internal void ExpandCount(int subnode_minimum)
+		{
+			this.CollapseAll();
+			foreach (TreeNode node in this.Nodes) {
+				if (ExpandCount(node, subnode_minimum) > subnode_minimum) {
+					node.Expand();
+				}
+			}
+		}
+
+		private int ExpandCount(TreeNode node, int subnode_minimum)
+		{
+			int subnode_count = node.Nodes.Count;
+			foreach (TreeNode subnode in node.Nodes) {
+				int count = ExpandCount(subnode, subnode_minimum);
+				if (count > subnode_count) {
+					subnode_count = count;
+				}
+			}
+
+			if (subnode_count >= subnode_minimum) {
+				node.Expand();
+			}
+			return subnode_count;
 		}
 	}
 }

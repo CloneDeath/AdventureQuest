@@ -88,6 +88,9 @@ namespace AdventureMaker
 
 				nudValue.Value = 0;
 				nudValue.Enabled = false;
+
+				btnMoveUp.Enabled = false;
+				btnMoveDown.Enabled = false;
 			} else {
 				cbItemName.Text = SelectedConditional.InventoryItem;
 				cbItemName.Enabled = true;
@@ -97,6 +100,19 @@ namespace AdventureMaker
 
 				nudValue.Value = SelectedConditional.Value;
 				nudValue.Enabled = true;
+
+				int Index = Conditionals.IndexOf(SelectedConditional);
+				if (Index == 0) {
+					btnMoveUp.Enabled = false;
+				} else {
+					btnMoveUp.Enabled = true;
+				}
+
+				if (Index == Conditionals.Count - 1) {
+					btnMoveDown.Enabled = false;
+				} else {
+					btnMoveDown.Enabled = true;
+				}
 			}
 
 			Updating = false;
@@ -155,6 +171,40 @@ namespace AdventureMaker
 		{
 			cbItemName.Items.Clear();
 			cbItemName.Items.AddRange(Adventure.GetItemNames());
+		}
+
+		private void btnMoveUp_Click(object sender, EventArgs e)
+		{
+			if (SelectedConditional == null) return;
+
+			int Index = Conditionals.IndexOf(SelectedConditional);
+
+			if (Index == 0) return; // Can't move up anymore.
+
+			InventoryConditional higher = Conditionals[Index - 1];
+			InventoryConditional lower = Conditionals[Index];
+
+			Conditionals[Index - 1] = lower;
+			Conditionals[Index] = higher;
+
+			lbConditionals.Refresh();
+		}
+
+		private void btnMoveDown_Click(object sender, EventArgs e)
+		{
+			if (SelectedConditional == null) return;
+
+			int Index = Conditionals.IndexOf(SelectedConditional);
+
+			if (Index == Conditionals.Count - 1) return; // Can't move down anymore.
+
+			InventoryConditional higher = Conditionals[Index];
+			InventoryConditional lower = Conditionals[Index + 1];
+
+			Conditionals[Index] = lower;
+			Conditionals[Index + 1] = higher;
+
+			lbConditionals.Refresh();
 		}
 
 		
